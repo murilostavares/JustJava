@@ -21,15 +21,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
-    <Button
-        android:id="@+id/increment"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:text="+"
-        android:onClick="increment"
-        android:layout_margin="16dp"
-        />
+        <Button
+            android:id="@+id/decrement"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="-"
+            android:onClick="decrement"
+            android:layout_margin="16dp"
+            />
 
     <TextView
         android:id="@+id/quantidade_apresentada"
@@ -41,15 +40,14 @@
         android:layout_margin="16dp"
         />
 
-    <Button
-        android:id="@+id/decrement"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:text="-"
-        android:onClick="decrement"
-        android:layout_margin="16dp"
-        />
-
+        <Button
+            android:id="@+id/increment"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="+"
+            android:onClick="increment"
+            android:layout_margin="16dp"
+            />
 
     </LinearLayout>
 
