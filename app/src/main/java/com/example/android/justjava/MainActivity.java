@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOrder(View view) {
 
-        double price = calcularPreco(num);
+        double price = calcularPreco();
         displayMessage(resumoPedido(price));
     }
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         return message;
     }
 
-    private int calcularPreco(int num) {
+    private int calcularPreco() {
 
         int calculo = num * precoUnitario;
 
