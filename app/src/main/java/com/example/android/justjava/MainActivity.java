@@ -9,6 +9,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     int num = 0;
+    int precoUnitario = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +20,25 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
 
         double price = calcularPreco(num);
-        String message = "Total: R$" + price + "\nObrigado!";
-        displayMessage(message);
+        displayMessage(resumoPedido(price));
+    }
 
+    private String resumoPedido(double price) {
+
+        String name = "Murilo de Souza Tavares";
+        String message = "Nome: " + name +
+                "\nQuantidade: " + num +
+                "\nTotal: R$" + price +
+                "\nObrigado!";
+
+        return message;
     }
 
     private int calcularPreco(int num) {
 
-        int calculo = num * 5;
-        return calculo;
+        int calculo = num * precoUnitario;
 
+        return calculo;
     }
 
     public void increment(View view) {
@@ -51,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayMessage(String message) {
 
-        TextView priceTextView = (TextView) findViewById(R.id.preco_apresentada);
-        priceTextView.setText(message);
+        TextView pedidoTextView = (TextView) findViewById(R.id.pedido_apresentado);
+        pedidoTextView.setText(message);
     }
 
 }

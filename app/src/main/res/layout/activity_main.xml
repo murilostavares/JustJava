@@ -53,18 +53,18 @@
 
 
     <TextView
-        android:id="@+id/preco_topico"
+        android:id="@+id/resumo_pedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PREÇO!"
+        android:text="DESCRIÇÃO DO PEDIDO:"
         android:layout_margin="16dp"
         />
 
     <TextView
-        android:id="@+id/preco_apresentada"
+        android:id="@+id/pedido_apresentado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:text="Em analise..."
         android:textColor="@android:color/black"
         android:textSize="16dp"
         android:layout_marginLeft="16dp"
