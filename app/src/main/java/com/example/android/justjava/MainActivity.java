@@ -1,5 +1,7 @@
 package com.example.android.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,59 +23,66 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOrder(View view) {
 
+        EditText name = findViewById(R.id.nome_view);
+        String nome = name.getText().toString();
+
         CheckBox chantilly = findViewById(R.id.checkbox_chantilly);
         boolean hasChantilly = chantilly.isChecked();
 
         CheckBox chocolate = findViewById(R.id.checkbox_chocolate);
         boolean hasChocolate = chocolate.isChecked();
 
-        double price = calcularPreco(hasChantilly,hasChocolate);
-        displayMessage(resumoPedido(price, hasChantilly, hasChocolate));
+        double price = calcularPreco(hasChantilly, hasChocolate);
+
+        String resumo = resumoPedido(nome, price, hasChantilly, hasChocolate);
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(intent.EXTRA_SUBJECT, "Just Java for " + nome);
+        intent.putExtra(intent.EXTRA_TEXT, resumo);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+
+        }
+
+
     }
 
-    private String resumoPedido(double price, boolean hasChantilly, boolean hasChocolate) {
+    private String resumoPedido(String nome, double price, boolean hasChantilly, boolean hasChocolate) {
 
-        EditText name = findViewById(R.id.nome_view);
-        String nome = name.getText().toString();
 
         String chantillySN = "SIM";
         String chocolateSN = "SIM";
 
-        if (hasChantilly == false) {
+        if (!hasChantilly) {
             chantillySN = "NÃO";
         }
-        if (hasChocolate == false) {
+        if (!hasChocolate) {
             chocolateSN = "NÃO";
         }
 
-        String message = "Nome: " + nome +
+        return "Nome: " + nome +
                 "\nChantilly? :" + chantillySN +
                 "\nChocolate? :" + chocolateSN +
                 "\nQuantidade: " + num +
                 "\nTotal: R$" + price +
                 "\nObrigado!";
-
-        return message;
     }
 
     private int calcularPreco(boolean hasChantilly, boolean hasChocolate) {
 
-        int chantillyPreco = 5;
-        int chocolatePreco = 5;
+        int chantillyPreco = 2;
+        int chocolatePreco = 1;
 
-        if (hasChantilly == false) {
-
+        if (!hasChantilly) {
             chantillyPreco = 0;
         }
 
-        if (hasChocolate == false) {
-
+        if (!hasChocolate) {
             chocolatePreco = 0;
         }
 
-        int calculo = num * precoUnitario + chantillyPreco + chocolatePreco;
-
-        return calculo;
+        return num * (precoUnitario + chantillyPreco + chocolatePreco);
     }
 
     public void increment(View view) {
@@ -85,10 +94,9 @@ public class MainActivity extends AppCompatActivity {
     public void decrement(View view) {
 
         if (num > 0) {
-
             num--;
-        } else {
 
+        } else {
             num = 0;
         }
 
@@ -103,10 +111,5 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-    private void displayMessage(String message) {
-
-        TextView pedidoTextView = findViewById(R.id.pedido_apresentado);
-        pedidoTextView.setText(message);
-    }
 
 }
